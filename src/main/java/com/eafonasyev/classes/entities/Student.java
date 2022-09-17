@@ -4,8 +4,25 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "STUDENT", schema = "SPRINGSTUDENT", catalog = "")
-public class StudentEntity {
 
+
+public class Student {
+
+    public Student() {
+    }
+
+    public Student(long id, String firstName, String lastName, String email) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
+    public Student( String firstName, String lastName, String email) {
+
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
     @Id
     @Column(name = "ID")
     private long id;
@@ -55,7 +72,7 @@ public class StudentEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        StudentEntity that = (StudentEntity) o;
+        Student that = (Student) o;
 
         if (id != that.id) return false;
         if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
