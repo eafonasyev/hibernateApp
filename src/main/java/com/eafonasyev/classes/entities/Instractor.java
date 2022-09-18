@@ -11,10 +11,9 @@ import java.util.List;
 @Table(name = "INSTRACTOR")
 public class Instractor {
     @Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
-   // @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "id_Sequence")
-   // @SequenceGenerator(name = "id_Sequence", sequenceName = "INSTRACTOR_SEQ")
     @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "id_gen")
+    @SequenceGenerator(name = "id_gen",sequenceName = "instractor_seq")
     private int id;
     @Basic
     @Column(name = "FIRST_NAME", nullable = true, length = 200)

@@ -1,13 +1,9 @@
 package com.eafonasyev.classes;
 
-import com.eafonasyev.classes.entities.Course;
-import com.eafonasyev.classes.entities.Instractor;
-import com.eafonasyev.classes.entities.InstractorDetail;
+import com.eafonasyev.classes.entities.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-
-import com.eafonasyev.classes.entities.Student;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -25,6 +21,7 @@ public class Main {
                 .addAnnotatedClass(Instractor.class)
                 .addAnnotatedClass(InstractorDetail.class)
                 .addAnnotatedClass(Course.class)
+                .addAnnotatedClass(Review.class)
                 .buildSessionFactory();
 
         // create session
@@ -33,10 +30,14 @@ public class Main {
         try {
 
             session.getTransaction().begin();
-            Object courses = new Course();
-            courses = session.get(Course.class,15);
 
-            session.delete(courses);
+            int courseId=1900;
+
+            Object course;
+
+            course = session.get(Course.class,courseId);
+
+            session.delete(course);
 
             session.getTransaction().commit();
 

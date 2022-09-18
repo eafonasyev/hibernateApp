@@ -1,6 +1,8 @@
 package com.eafonasyev.classes.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Course {
@@ -21,12 +23,32 @@ public class Course {
     @JoinColumn(name = "INSTRACTOR_ID",insertable = false,updatable = false)
     private Instractor instractor;
 
+    @OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+    @JoinColumn(name="course_id")
+    private List<Review> review;
+
+    public List<Review> getReview() {
+        return review;
+    }
+
+    public void setReview(List<Review> review) {
+        this.review = review;
+    }
+
+    public void add(Review reviews){
+        if (this.review == null){
+            review = new ArrayList<Review>();
+        }
+        review.add(reviews);
+    }
+
     public Course() {
     }
 
     public Course(String title) {
         this.title = title;
     }
+
 
     public Course(String title, Long instracrorId) {
         this.title = title;
