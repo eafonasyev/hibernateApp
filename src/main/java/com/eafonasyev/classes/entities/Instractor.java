@@ -1,26 +1,69 @@
 package com.eafonasyev.classes.entities;
 
+import org.hibernate.engine.internal.Cascade;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
+@Table(name = "INSTRACTOR")
 public class Instractor {
-    private long id;
-    private String firstName;
-    private String lastName;
-    private InstractorDetail instractorDetailByInstractorId;
-
     @Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+   // @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "id_Sequence")
+   // @SequenceGenerator(name = "id_Sequence", sequenceName = "INSTRACTOR_SEQ")
     @Column(name = "ID")
+    private int id;
+    @Basic
+    @Column(name = "FIRST_NAME", nullable = true, length = 200)
+    private String firstName;
+    @Basic
+    @Column(name = "LAST_NAME", nullable = true, length = 200)
+    private String lastName;
+    @OneToOne(cascade = {CascadeType.DETACH,
+                         CascadeType.MERGE,
+                         CascadeType.PERSIST,
+                         CascadeType.REFRESH})
+    @JoinColumn(name = "INSTRACTOR_DETAIL_ID")
+    private InstractorDetail instractorDetail;
+
+    @OneToMany(mappedBy = "instractor",
+               cascade = {CascadeType.DETACH,CascadeType.MERGE,
+                                                 CascadeType.PERSIST,CascadeType.REFRESH})
+    private List<Course> courses;
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
+
+    public Instractor() {
+    }
+
+    public Instractor(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    public Instractor(int id, String firstName, String lastName) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     public long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "FIRST_NAME")
     public String getFirstName() {
         return firstName;
     }
@@ -29,8 +72,6 @@ public class Instractor {
         this.firstName = firstName;
     }
 
-    @Basic
-    @Column(name = "LAST_NAME")
     public String getLastName() {
         return lastName;
     }
@@ -39,35 +80,31 @@ public class Instractor {
         this.lastName = lastName;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
 
-        Instractor that = (Instractor) o;
+    public InstractorDetail getInstractorDetail() {
+        return instractorDetail;
+    }
 
-        if (id != that.id) return false;
-        if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
-        if (lastName != null ? !lastName.equals(that.lastName) : that.lastName != null) return false;
-
-        return true;
+    public void setInstractorDetail(InstractorDetail instractorDetail) {
+        this.instractorDetail = instractorDetail;
     }
 
     @Override
-    public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
-        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
-        return result;
+    public String toString() {
+        return "Instractor{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", instractorDetail=" + instractorDetail +
+                '}';
     }
-
-    @ManyToOne
-    @JoinColumn(name = "INSTRACTOR_ID", referencedColumnName = "ID")
-    public InstractorDetail getInstractorDetailByInstractorId() {
-        return instractorDetailByInstractorId;
-    }
-
-    public void setInstractorDetailByInstractorId(InstractorDetail instractorDetailByInstractorId) {
-        this.instractorDetailByInstractorId = instractorDetailByInstractorId;
+    public void add(Course course){
+        if(courses==null){
+            courses = new ArrayList<Course>();
+        }
+        courses.add(course);
+        course.setInstractor(this);
     }
 }
+
+

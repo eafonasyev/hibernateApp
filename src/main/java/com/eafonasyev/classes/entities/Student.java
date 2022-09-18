@@ -3,7 +3,7 @@ package com.eafonasyev.classes.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "STUDENT", schema = "SPRINGSTUDENT", catalog = "")
+@Table(name = "STUDENT", schema = "SPRINGUSER", catalog = "")
 
 
 public class Student {

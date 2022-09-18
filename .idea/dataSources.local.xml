@@ -1,24 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal">
-    <data-source name="@localhost" uuid="5bbadbd7-fdc6-430f-97cd-af050105962e">
-      <database-info product="Oracle" version="Oracle Database 18c Express Edition Release 18.0.0.0.0 - Production" jdbc-version="4.2" driver-name="Oracle JDBC driver" driver-version="12.2.0.1.0">
+    <data-source name="@localhost" uuid="23d11ae7-72ff-4bc5-a764-90971ef867d7">
+      <database-info product="Oracle" version="Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production" jdbc-version="4.2" driver-name="Oracle JDBC driver" driver-version="12.2.0.1.0">
         <extra-name-characters>$#</extra-name-characters>
         <identifier-quote-string>&quot;</identifier-quote-string>
       </database-info>
       <case-sensitivity plain-identifiers="upper" quoted-identifiers="exact" />
       <secret-storage>master_key</secret-storage>
-      <user-name>springstudent</user-name>
-      <introspection-schemas>*:SPRINGSTUDENT</introspection-schemas>
-    </data-source>
-    <data-source name="src:hibernate.cfg.xml/Hibernate" uuid="7e32eb07-8be8-44fe-ba6b-20fb5bdda0a4">
-      <database-info product="Oracle" version="Oracle Database 18c Express Edition Release 18.0.0.0.0 - Production" jdbc-version="4.2" driver-name="Oracle JDBC driver" driver-version="12.2.0.1.0">
-        <extra-name-characters>$#</extra-name-characters>
-        <identifier-quote-string>&quot;</identifier-quote-string>
-      </database-info>
-      <case-sensitivity plain-identifiers="upper" quoted-identifiers="exact" />
-      <user-name>springstudent</user-name>
-      <introspection-schemas>*:SPRINGSTUDENT</introspection-schemas>
+      <user-name>springuser</user-name>
+      <introspection-schemas>*:SPRINGUSER</introspection-schemas>
     </data-source>
   </component>
 </project>
